@@ -1,17 +1,25 @@
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+
 
 .body {
   background-color: #000000;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  color: #fff;
 }
 
 .page {
   padding-top: 45px;
   padding-bottom: 60px;
-  margin: 0 calc(5*100%/32);
-  /* один отступ в 200px на странице в 1280px это 5/32.
-  Решил сохранить пропорцию для всех экранов кроме мобильных,
-  т.к. в макете нет промежуточныз брейкпоинтов
-  */
+  margin: 0 auto;
   max-width: 880px;
 }
 
@@ -34,16 +42,53 @@
 
 @media screen and (max-width: 560px) {
   .header {
-    margin: 0 -19px;
+    /*margin: 0 -19px;
     padding-left: 27px;
-    height: 56px;
+    height: 56px;*/
   }
 }
 
 .header__logo {
-  height:
+
 }
 
 .profile {
-  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__account {
+  display: flex;
+}
+
+.profile__avatar {
+  width: 120px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.profile__info {
+  margin: auto 0;
+
+}
+
+
+
+.profile__name {
+  padding: 0;
+  margin: 0 0 16px 0;
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__description {
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.21;
+  font-weight: 400;
 }
