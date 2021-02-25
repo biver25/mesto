@@ -16,22 +16,97 @@
     </header>
     <main class="content">
       <section class="profile">
+
         <div class="profile__account">
           <img class="profile__avatar" src="./images/profile-avatar-сousteau.jpg" alt="Cousteau">
+
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <div class="profile__row">
+              <p class="profile__name">Жак-Ив Кусто</p>
+              <button class="profile__edit-btn"></button>
+            </div>
             <p class="profile__description">Исследователь океана</p>
           </div>
+
+
         </div>
-        <img class="add-button" src="./images/add-button.svg" alt="Добавить">
+
+        <button class="profile__add-btn"></button>
       </section>
       <section class="elements">
-
+        <ul class="elements__list">
+          <li class="elements__element">
+            <figure class="elements__figure">
+              <img class="elements__img" alt="Карачаевск" src="./images/elements-karachaevsk.jpg">
+              <div class="elements__sign">
+                <figcaption class="elements__caption">Карачаевск</figcaption>
+                <div class="elements__like"></div>
+              </div>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__figure">
+              <img class="elements__img" alt="Карачаевск" src="./images/elements-elbrus1.jpg">
+              <div class="elements__sign">
+                <figcaption class="elements__caption">Гора Эльбрус</figcaption>
+                <div class="elements__like"></div>
+              </div>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__figure">
+              <img class="elements__img" alt="Карачаевск" src="./images/elements-dombai1.jpg">
+              <div class="elements__sign">
+                <figcaption class="elements__caption">Домбай</figcaption>
+                <div class="elements__like"></div>
+              </div>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__figure">
+              <img class="elements__img" alt="Карачаевск" src="./images/elements-elbrus2.jpg">
+              <div class="elements__sign">
+                <figcaption class="elements__caption">Гора Эльбрус</figcaption>
+                <div class="elements__like"></div>
+              </div>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__figure">
+              <img class="elements__img" alt="Карачаевск" src="./images/elements-dombai2.jpg">
+              <div class="elements__sign">
+                <figcaption class="elements__caption">Домбай</figcaption>
+                <div class="elements__like"></div>
+              </div>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__figure">
+              <img class="elements__img" alt="Карачаевск" src="./images/elements-karachaevo.jpg">
+              <div class="elements__sign">
+                <figcaption class="elements__caption">Карачаево-Черкесия</figcaption>
+                <div class="elements__like"></div>
+              </div>
+            </figure>
+          </li>
+        </ul>
       </section>
     </main>
     <footer class="footer">
-
+      <p class="footer__sign">&copy;2020 Mesto Russia</p>
     </footer>
+    <section class="popup popup_disabled">
+      <div class="popup__overlay">
+        <div class="popup__form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" placeholder="Имя" class="popup__input popup__name-edit">
+          <input type="text" placeholder="Описание" class="popup__input popup__descr-edit">
+          <button class="popup__save-btn">Сохранить</button>
+          <button class="popup__exit-btn"></button>
+        </div>
+      </div>
+    </section>
   </div>
+
 </body>
 </html>
