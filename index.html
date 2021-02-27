@@ -40,7 +40,7 @@
               <img class="elements__img" alt="Карачаевск" src="./images/elements-karachaevsk.jpg">
               <div class="elements__sign">
                 <figcaption class="elements__caption">Карачаевск</figcaption>
-                <div class="elements__like"></div>
+                <div class="elements__like elements__like_active"></div>
               </div>
             </figure>
           </li>
@@ -58,7 +58,7 @@
               <img class="elements__img" alt="Карачаевск" src="./images/elements-dombai1.jpg">
               <div class="elements__sign">
                 <figcaption class="elements__caption">Домбай</figcaption>
-                <div class="elements__like"></div>
+                <div class="elements__like elements__like_active"></div>
               </div>
             </figure>
           </li>
@@ -97,13 +97,13 @@
     </footer>
     <section class="popup popup_disabled">
       <div class="popup__overlay">
-        <div class="popup__form">
+        <form class="popup__form" action="">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" placeholder="Имя" class="popup__input popup__name-edit">
-          <input type="text" placeholder="Описание" class="popup__input popup__descr-edit">
+          <input type="text" placeholder="Имя" name="Name" class="popup__input popup__name-edit">
+          <input type="text" placeholder="Описание" name="description" class="popup__input popup__descr-edit">
           <button class="popup__save-btn">Сохранить</button>
           <button class="popup__exit-btn"></button>
-        </div>
+        </form>
       </div>
     </section>
   </div>
