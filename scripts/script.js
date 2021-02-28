@@ -16,12 +16,6 @@ function openClosePopup() {
   descriptionEdit.value = profileDescription.textContent;
 
   popup.classList.toggle('popup_disabled');
-  //if (popup.classList.contains('popup_disabled')) {
-  //  popup.classList.remove('popup_disabled');
-  //}
-  //else {
-  //popup.classList.add('popup_disabled');
-  //}
 }
 
 function formSubmit() {
