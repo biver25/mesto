@@ -1,0 +1,25 @@
+.profile__add-btn {
+  height: 50px;
+  width: 150px;
+  min-width: 50px;
+  margin-left: 18px;
+  background: url(../../../images/profile-add.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.profile__add-btn:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 633px) {
+  .profile__add-btn {
+    width: 100%;
+    padding: 0;
+    margin: 36px 19px 0;
+  }
+}

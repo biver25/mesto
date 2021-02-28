@@ -1,0 +1,13 @@
+.elements__figure {
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  max-width: 320px;
+}
+
+@media screen and (max-width: 633px) {
+  .elements__figure {
+    max-width: 484px;
+  }
+}
