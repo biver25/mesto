@@ -7,8 +7,8 @@ let popup = document.querySelector('.popup');
 let popupForm = popup.querySelector('.popup__form');
 let exitButton = popupForm.querySelector('.popup__exit-btn');
 let saveButton = popupForm.querySelector('.popup__save-btn')
-let nameEdit = popupForm.querySelector('.popup__name-edit');
-let descriptionEdit = popupForm.querySelector('.popup__descr-edit');
+let nameEdit = popupForm.querySelector('.popup__input_type_name');
+let descriptionEdit = popupForm.querySelector('.popup__input_type_descr');
 
 
 function openClosePopup() {
