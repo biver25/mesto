@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Карачаевск',
-    link: './images/elements-elbrus1.jpg'
-  },
-  {
-    name: 'Эльбрус',
-    link: './images/elements-elbrus1.jpg'
-  },
-  {
-    name: 'Домбай',
-    link: './images/elements-dombai1.jpg'
-  },
-  {
-    name: 'Эльбрус',
-    link: './images/elements-elbrus2.jpg'
-  },
-  {
-    name: 'Домбай',
-    link: './images/elements-dombai2.jpg'
-  },
-  {
-    name: 'Карачаево-Черкесия',
-    link: './images/elements-karachaevo.jpg'
-  }
-];
-
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
 const profileDescription = profile.querySelector('.profile__description');
@@ -76,16 +49,18 @@ function addElementsListeners(element) {
   figurePicture.addEventListener('click', function openPopupFigure(event) {
     const elementsFigure =  event.target.closest('.elements__figure');
     popupImg.src = elementsFigure.querySelector('.elements__img').src;
-    popupImg.alt = elementsFigure.querySelector('.elements__caption').textContent;
+    const elementsCaption = elementsFigure.querySelector('.elements__caption');
+    popupImg.alt = elementsCaption.textContent;
     popupCaption.textContent = elementsFigure.querySelector('.elements__caption').textContent;
-    openPopup(event, '.popup_open-card');
+    togglePopup(popupOpenCard);
   });
 };
 
 function createCardDomNode(item) {
   const element = elementTemplate.querySelector('.elements__element').cloneNode(true);
-  element.querySelector('.elements__img').src = item.link;
-  element.querySelector('.elements__img').alt = item.name;
+  const elementImg = element.querySelector('.elements__img');
+  elementImg.src = item.link;
+  elementImg.alt = item.name;
   element.querySelector('.elements__caption').textContent = item.name;
   addElementsListeners(element);
   return element;
@@ -94,52 +69,64 @@ function createCardDomNode(item) {
 function renderCards() {
   const initialCardsArr = initialCards.map(createCardDomNode);
   elementsList.append(...initialCardsArr);
-  return initialCardsArr;
-}
+};
 
 renderCards();
 
-function openClosePopup() {
+function togglePopup(popup){
+  popup.classList.toggle('popup_disabled');
+};
+
+function toggleEditProfilePopup() {
+
+  if (popupEditProfile.classList.contains('popup_disabled')) {
+
   nameEdit.value = profileName.textContent;
   descriptionEdit.value = profileDescription.textContent;
-  popupEditProfile.classList.toggle('popup_disabled');
-}
 
-function formSubmit() {
+  };
+
+  togglePopup(popupEditProfile);
+
+};
+
+function editProfileFromSubmit() {
   profileName.textContent = nameEdit.value;
   profileDescription.textContent = descriptionEdit.value;
-  openClosePopup();
-}
+  toggleEditProfilePopup();
+};
 
-function cardCreate() {
+function submitAddCardForm() {
   const newCard = {
     name: addCardAddNameEdit.value,
     link: addCardAddLinkEdit.value
   };
   elementsList.prepend(createCardDomNode(newCard));
-  document.querySelector('.popup_add-card').classList.toggle('popup_disabled')
+
+  togglePopup(popupAddCard);
+
   addCardAddNameEdit.value = '';
   addCardAddLinkEdit.value = '';
 };
 
-function openPopup(event, target) {
-  document.querySelector(target).classList.toggle('popup_disabled');
-};
+function eraseInputFields() {
 
-function closePopup(event, target) {
-  document.querySelector(target).classList.toggle('popup_disabled');
-};
+  togglePopup(popupAddCard);
 
-editButton.addEventListener('click', (event) => openClosePopup(event, '.popup_edit-profile'));
-exitButton.addEventListener('click', (event) => openClosePopup(event, '.popup_edit-profile'));
+    addCardAddNameEdit.value = '';
+    addCardAddLinkEdit.value = '';
+ }
+
+editButton.addEventListener('click', toggleEditProfilePopup);
+exitButton.addEventListener('click', toggleEditProfilePopup);
 popupForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  formSubmit();
+  editProfileFromSubmit();
 });
-addButton.addEventListener('click', (event) => openPopup(event, '.popup_add-card'));
-addCardExitButton.addEventListener('click', (event) => closePopup(event, '.popup_add-card'));
+addButton.addEventListener('click', () => togglePopup(popupAddCard));
+addCardExitButton.addEventListener('click', eraseInputFields);
 addCardPopupForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  cardCreate();
+  submitAddCardForm();
 });
-popupCardExitButton.addEventListener('click', (event) => closePopup(event, '.popup_open-card'));
+popupCardExitButton.addEventListener('click', () => togglePopup(popupOpenCard));
