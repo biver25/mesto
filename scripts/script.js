@@ -2,14 +2,12 @@ const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
 const profileDescription = profile.querySelector('.profile__description');
 const editButton = profile.querySelector('.profile__edit-btn');
-
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupForm = popupEditProfile.querySelector('.popup__form');
 const popupEditProfileExitButton = popupForm.querySelector('.popup__exit-btn');
 const saveButton = popupForm.querySelector('.popup__save-btn')
 const nameEdit = popupForm.querySelector('.popup__input_type_name');
 const descriptionEdit = popupForm.querySelector('.popup__input_type_descr');
-
 const addButton = profile.querySelector('.profile__add-btn');
 const popupAddCard = document.querySelector('.popup_add-card');
 const addCardPopupForm = popupAddCard.querySelector('.popup__form');
@@ -17,12 +15,10 @@ const addCardExitButton = addCardPopupForm.querySelector('.popup__exit-btn');
 const addCardSaveButton = addCardPopupForm.querySelector('.popup__save-btn')
 const addCardAddNameEdit = addCardPopupForm.querySelector('.popup__input_type_add-name');
 const addCardAddLinkEdit = addCardPopupForm.querySelector('.popup__input_type_add-link');
-
 const popupOpenCard = document.querySelector('.popup_open-card');
 const popupImg = popupOpenCard.querySelector('.popup__img');
 const popupCaption = popupOpenCard.querySelector('.popup__caption');
 const popupCardExitButton = popupOpenCard.querySelector('.popup__exit-btn');
-
 const elementTemplate = document.querySelector('#elementTemplate').content;
 const elementsList = document.querySelector('.elements__list');
 
@@ -46,7 +42,6 @@ function openPopupFigure(event) {
 }
 
 function addElementsListeners(element) {
-
   const deleteButton = element.querySelector('.elements__delete');
   deleteButton.addEventListener('click', deleteElement);
   const likeButton = element.querySelector('.elements__like');
@@ -110,14 +105,6 @@ function toggleAddCardPopup () {
   };
   togglePopup(popupAddCard);
 };
-
-/*function eraseInputFields() {
-
-  togglePopup(popupAddCard);
-
-    addCardAddNameEdit.value = '';
-    addCardAddLinkEdit.value = '';
- }*/
 
 editButton.addEventListener('click', toggleEditProfilePopup);
 popupEditProfileExitButton.addEventListener('click', toggleEditProfilePopup);
