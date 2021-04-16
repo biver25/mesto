@@ -29,7 +29,7 @@ const config = {
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible'
-}
+};
 
 function likeCard(event) {
   const eventTarget = event.target;
@@ -49,7 +49,7 @@ function openPopupFigure(event) {
   popupCaption.textContent = elementsFigure.querySelector('.elements__caption').textContent;
   togglePopup(popupOpenCard);
   setOverlayListener(popupOpenCard);
-}
+};
 
 function addElementsListeners(element) {
   const deleteButton = element.querySelector('.elements__delete');
@@ -82,7 +82,6 @@ renderCards();
 const checkClickOnOverlay = (event) => {
   const currentOverlay = event.target;
   if (currentOverlay.classList.contains('popup')) {
-
     togglePopup(currentOverlay);
     currentOverlay.removeEventListener('click', checkClickOnOverlay);
   };
@@ -169,9 +168,9 @@ const checkClickEsc = (event) => {
     popupList.forEach((popupElement) => {
       if (!popupElement.classList.contains('popup_disabled')) {
         togglePopup(popupElement);
-      }
-    })
-  }
+      };
+    });
+  };
 };
 
 document.addEventListener('keydown', checkClickEsc);

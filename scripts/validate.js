@@ -4,6 +4,7 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
+
 const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}) => {
   inputElement.classList.remove(inputErrorClass);
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -16,7 +17,6 @@ const hasInvalidInput = (inputList) => {
     return (!inputElement.validity.valid);
   });
 };
-
 
 const toggleButtonState = (formElement, inputList, {submitButtonSelector, inactiveButtonClass}) => {
   const submitButton = formElement.querySelector(submitButtonSelector);
@@ -32,40 +32,34 @@ const toggleButtonState = (formElement, inputList, {submitButtonSelector, inacti
 
 const checkInputValidity = (inputElement, formElement, rest) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, rest)
-    console.log('->', inputElement.validity.valid, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, rest);
   }
   else {
-    hideInputError(formElement, inputElement, rest)
+    hideInputError(formElement, inputElement, rest);
   }
 };
 
 const checkFormValidity = (formElement, inputElement, inputList, rest) => {
   checkInputValidity(inputElement, formElement, rest);
   toggleButtonState(formElement, inputList, rest);
-  };
+};
 
 const setEventListeners = (formElement, {inputSelector, ...rest}) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-
   inputList.forEach((inputElement) => {
-
-    inputElement.addEventListener('input', (event) => { checkFormValidity(formElement, inputElement, inputList, rest)});
+    inputElement.addEventListener('input', (event) => {
+      checkFormValidity(formElement, inputElement, inputList, rest);
+    });
   });
-
 };
 
-
 const enableValidation = ({formSelector, ...rest}) => {
-  const formList = Array.from(document.querySelectorAll(formSelector)); // Serach ALL Forms
-  formList.forEach((formElement) => { // for each form prevent reload during submit
+  const formList = Array.from(document.querySelectorAll(formSelector));
+  formList.forEach((formElement) => {
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();
     });
-    setEventListeners(formElement, rest); // call new function to set listeners
+    setEventListeners(formElement, rest);
   });
 
 };
-
-
-
