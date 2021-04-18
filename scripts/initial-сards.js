@@ -1,7 +1,7 @@
 const initialCards = [
   {
     name: 'Карачаевск',
-    link: './images/elements-elbrus1.jpg'
+    link: './images/baikal.jpg'
   },
   {
     name: 'Эльбрус',

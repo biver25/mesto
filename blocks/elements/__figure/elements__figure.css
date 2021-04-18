@@ -3,14 +3,14 @@
   background-color: #fff;
   margin: 0;
   padding: 0;
-  max-width: 320px;
-  max-height: 100%;
+  max-width: 282px;
+  max-height: 361px;
   overflow: hidden;
   position: relative;
 }
 
-@media screen and (max-width: 633px) {
+/*@media screen and (max-width: 633px) {
   .elements__figure {
     max-width: 484px;
   }
-}
+}*/
