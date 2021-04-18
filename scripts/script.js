@@ -22,15 +22,6 @@ const popupCardExitButton = popupOpenCard.querySelector('.popup__exit-btn');
 const elementTemplate = document.querySelector('#elementTemplate').content;
 const elementsList = document.querySelector('.elements__list');
 
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__save-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
-};
-
 function likeCard(event) {
   const eventTarget = event.target;
   eventTarget.classList.toggle('elements__like_active');
@@ -38,7 +29,7 @@ function likeCard(event) {
 
 function deleteElement(event) {
   const cardElement = event.target.closest('.elements__element');
-  cardElement.replaceWith('');
+  cardElement.remove();
 };
 
 function openPopupFigure(event) {
@@ -47,8 +38,7 @@ function openPopupFigure(event) {
   const elementsCaption = elementsFigure.querySelector('.elements__caption');
   popupImg.alt = elementsCaption.textContent;
   popupCaption.textContent = elementsFigure.querySelector('.elements__caption').textContent;
-  togglePopup(popupOpenCard);
-  setOverlayListener(popupOpenCard);
+  openPopup(popupOpenCard);
 };
 
 function addElementsListeners(element) {
@@ -82,44 +72,49 @@ renderCards();
 const checkClickOnOverlay = (event) => {
   const currentOverlay = event.target;
   if (currentOverlay.classList.contains('popup')) {
-    togglePopup(currentOverlay);
-    currentOverlay.removeEventListener('click', checkClickOnOverlay);
+    closePopup(currentOverlay);
   };
 };
 
-const setOverlayListener = (popup) => {
-  popup.addEventListener('click', checkClickOnOverlay);
+const setOverlayListeners = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener('click', checkClickOnOverlay);
+  });
+
 };
 
-function togglePopup(popup){
+const openPopup = (popup) => {
+  popup.classList.remove('popup_disabled');
+  console.log('popup open');
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
+};
 
+const resetValidity = (popup) => {
   const currentPopupForm = popup.querySelector(config.formSelector);
   if (currentPopupForm) {
-  const currentInputList = Array.from(currentPopupForm.querySelectorAll(config.inputSelector));
-  currentInputList.forEach((currentInputElement) => {
-    hideInputError(currentPopupForm, currentInputElement, config );
-    toggleButtonState(currentPopupForm, currentInputList, config);
-  });
-};
-    popup.classList.toggle('popup_disabled');
+    const currentInputList = Array.from(currentPopupForm.querySelectorAll(config.inputSelector));
+    currentInputList.forEach((currentInputElement) => {
+      hideInputError(currentPopupForm, currentInputElement, config);
+      toggleButtonState(currentPopupForm, currentInputList, config);
+    });
+  };
 };
 
-function toggleEditProfilePopup() {
-  if (popupEditProfile.classList.contains('popup_disabled')) {
-  nameEdit.value = profileName.textContent;
-  descriptionEdit.value = profileDescription.textContent;
-  setOverlayListener(popupEditProfile);
-  }
-  else {
-    popupEditProfile.removeEventListener('click', checkClickOnOverlay);
-  }
-  togglePopup(popupEditProfile);
+const closePopup = (popup) => {
+  popup.classList.add('popup_disabled');
+  popup.classList.remove('popup_opened');
+  console.log('popup close 1');
+  document.removeEventListener('keydown', closeByEscape);
 };
 
 function editProfileFromSubmit() {
   profileName.textContent = nameEdit.value;
   profileDescription.textContent = descriptionEdit.value;
-  toggleEditProfilePopup();
+  closePopup(popupEditProfile);
+  console.log('popup close 2');
+  resetValidity(popupEditProfile);
 };
 
 function submitAddCardForm() {
@@ -128,51 +123,60 @@ function submitAddCardForm() {
     link: addCardAddLinkEdit.value
   };
   elementsList.prepend(createCardDomNode(newCard));
-  togglePopup(popupAddCard);
+  closePopup(popupAddCard);
+  resetFormFields();
+};
+
+const resetFormFields = () => {
   addCardAddNameEdit.value = '';
   addCardAddLinkEdit.value = '';
 };
 
-function toggleAddCardPopup () {
-  if (popupAddCard.classList.contains('popup_disabled')) {
-  addCardAddNameEdit.value = '';
-  addCardAddLinkEdit.value = '';
-  setOverlayListener(popupAddCard);
-  }
-  else {
-    popupAddCard.removeEventListener('click', checkClickOnOverlay);
-  }
-  togglePopup(popupAddCard);
-};
+editButton.addEventListener('click', () => {
+  console.log('edit button pushed');
+  nameEdit.value = profileName.textContent;
+  descriptionEdit.value = profileDescription.textContent;
+  resetValidity(popupEditProfile);
+  openPopup(popupEditProfile);
+});
 
-editButton.addEventListener('click', toggleEditProfilePopup);
-popupEditProfileExitButton.addEventListener('click', toggleEditProfilePopup);
+popupEditProfileExitButton.addEventListener('click', () => {
+  resetValidity(popupEditProfile);
+  closePopup(popupEditProfile);
+});
+
 popupForm.addEventListener('submit', (event) => {
   event.preventDefault();
   editProfileFromSubmit();
+  console.log('why');
 });
-addButton.addEventListener('click', toggleAddCardPopup);
-addCardExitButton.addEventListener('click', toggleAddCardPopup);
+
+addButton.addEventListener('click', () => {
+  resetFormFields();
+  openPopup(popupAddCard);
+  resetValidity(popupAddCard);
+});
+
+addCardExitButton.addEventListener('click', () => {
+  closePopup(popupAddCard);
+  resetValidity(popupAddCard);
+});
+
 addCardPopupForm.addEventListener('submit', (event) => {
   event.preventDefault();
   submitAddCardForm();
 });
+
 popupCardExitButton.addEventListener('click', () => {
-  togglePopup(popupOpenCard);
-  popupOpenCard.removeEventListener('click', checkClickOnOverlay);
+  closePopup(popupOpenCard);
+  resetValidity(popupOpenCard);
 });
 
-const checkClickEsc = (event) => {
+const closeByEscape = (event) => {
   if (event.key === 'Escape') {
-    popupList = Array.from(document.querySelectorAll('.popup'));
-    popupList.forEach((popupElement) => {
-      if (!popupElement.classList.contains('popup_disabled')) {
-        togglePopup(popupElement);
-      };
-    });
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   };
 };
 
-document.addEventListener('keydown', checkClickEsc);
-
-enableValidation(config);
+setOverlayListeners();
