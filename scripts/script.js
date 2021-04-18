@@ -86,7 +86,6 @@ const setOverlayListeners = () => {
 
 const openPopup = (popup) => {
   popup.classList.remove('popup_disabled');
-  console.log('popup open');
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
 };
@@ -105,7 +104,6 @@ const resetValidity = (popup) => {
 const closePopup = (popup) => {
   popup.classList.add('popup_disabled');
   popup.classList.remove('popup_opened');
-  console.log('popup close 1');
   document.removeEventListener('keydown', closeByEscape);
 };
 
@@ -113,7 +111,6 @@ function editProfileFromSubmit() {
   profileName.textContent = nameEdit.value;
   profileDescription.textContent = descriptionEdit.value;
   closePopup(popupEditProfile);
-  console.log('popup close 2');
   resetValidity(popupEditProfile);
 };
 
@@ -133,7 +130,6 @@ const resetFormFields = () => {
 };
 
 editButton.addEventListener('click', () => {
-  console.log('edit button pushed');
   nameEdit.value = profileName.textContent;
   descriptionEdit.value = profileDescription.textContent;
   resetValidity(popupEditProfile);
@@ -148,7 +144,6 @@ popupEditProfileExitButton.addEventListener('click', () => {
 popupForm.addEventListener('submit', (event) => {
   event.preventDefault();
   editProfileFromSubmit();
-  console.log('why');
 });
 
 addButton.addEventListener('click', () => {
