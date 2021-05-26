@@ -48,6 +48,8 @@ export default class Card {
   generateCard() {
     this._fillContent();
     this._addElementsListeners();
+
     return this._element;
+
   }
 }

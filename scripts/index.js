@@ -4,7 +4,59 @@ import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
+import Section from './Section.js';
 
+/*const createCard = (data) => {
+  const cardElement = new Card(data, templateSelector, handleCardClick);
+  return cardElement.generateCard();
+}*/
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, templateSelector, handleCardClick);
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
+  }
+}, '.elements__list'
+);
+
+cardsList.renderItems();
+
+addButton.addEventListener('click', () => {
+  const AddCardPopup = new PopupWithForm('.profile__edit-btn', )
+  /*resetFormFields();
+  openPopup(popupAddCard);
+  addCardFormValidator.resetValidity();*/
+});
+
+addCardPopupForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  submitAddCardForm();
+});
+
+const checkClickOnOverlay = (event) => {
+  const currentOverlay = event.target;
+  if (currentOverlay.classList.contains('popup')) {
+    closePopup(currentOverlay); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  };
+};
+
+const setOverlayListeners = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener('click', checkClickOnOverlay);
+  });
+};
+
+setOverlayListeners();
+
+
+/*initialCards.forEach((item) => {
+  elementsList.append(createCard(item));
+});
+*/
 const popupOpenCard = document.querySelector('.popup_open-card');
 const popupImg = popupOpenCard.querySelector('.popup__img');
 const popupCaption = popupOpenCard.querySelector('.popup__caption');
@@ -67,28 +119,16 @@ const createCard = (data) => {
   return cardElement.generateCard();
 }
 
-initialCards.forEach((item) => {
-  elementsList.append(createCard(item));
-});
+
 
 const addCardFormValidator = new FormValidator(config, '.popup_add-card');
 addCardFormValidator.enableValidation();
 const editProfileFormValidator = new FormValidator(config, '.popup_edit-profile');
 editProfileFormValidator.enableValidation();
 
-const checkClickOnOverlay = (event) => {
-  const currentOverlay = event.target;
-  if (currentOverlay.classList.contains('popup')) {
-    closePopup(currentOverlay); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  };
-};
 
-const setOverlayListeners = () => {
-  const popupList = Array.from(document.querySelectorAll('.popup'));
-  popupList.forEach((popupElement) => {
-    popupElement.addEventListener('click', checkClickOnOverlay);
-  });
-};
+
+
 
 const resetFormFields = () => {
   addCardAddNameEdit.value = '';
@@ -133,14 +173,13 @@ addCardExitButton.addEventListener('click', () => {
 });
 
 addButton.addEventListener('click', () => {
-  resetFormFields();
+  const AddCardPopup = new PopupWithForm('.profile__edit-btn', )
+  /*resetFormFields();
   openPopup(popupAddCard);
-  addCardFormValidator.resetValidity();
+  addCardFormValidator.resetValidity();*/
 });
 
 addCardPopupForm.addEventListener('submit', (event) => {
   event.preventDefault();
   submitAddCardForm();
 });
-
-setOverlayListeners();
