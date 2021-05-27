@@ -6,14 +6,12 @@ export default class UserInfo {
 
   getUserInfo() {
     const userProfile = {};
-    const name = this._nameField.value;
-    const description = this._descriptionField.value;
-    userProfile[name] = name;
-    userProfile[description] = description;
+    userProfile.name = this._nameField.textContent;
+    userProfile.description = this._descriptionField.textContent;
     return userProfile;
   }
 
-  setUserInfo({userProfile}) {
+  setUserInfo(userProfile) {
     this._nameField.textContent = userProfile.name;
     this._descriptionField.textContent = userProfile.description;
   }
