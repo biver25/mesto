@@ -1,5 +1,5 @@
 .popup__exit-btn {
-  background: url(../../../images/popup-exit.svg);
+  background: url(../../../src/popup-exit.svg);
   height: 56px;
   width: 56px;
   position: absolute;
