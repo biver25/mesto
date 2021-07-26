@@ -18,14 +18,17 @@ import {templateSelector,
 
 const handleCardClick = (image, caption) => {
   popupWithImage.open(image, caption);
-  popupWithImage.setEventListeners();
-}
+};
+
+const createCard = (item) => {
+  const card = new Card(item, templateSelector, handleCardClick);
+  return card.generateCard();
+};
 
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, templateSelector, handleCardClick);
-    const cardElement = card.generateCard();
+    const cardElement = createCard(item);
     cardsList.addItem(cardElement);
   }
 }, '.elements__list'
@@ -36,8 +39,7 @@ cardsList.renderItems();
 const submitAddCardForm = (inputValues) => {
   inputValues.name = inputValues.addName;
   inputValues.link = inputValues.addLink;
-  const card = new Card(inputValues, templateSelector, handleCardClick);
-  const cardElement = card.generateCard();
+  const cardElement = createCard(inputValues);
   cardsList.addItem(cardElement);
 };
 
@@ -61,8 +63,6 @@ addButton.addEventListener('click', () => {
   addCardFormValidator.resetValidity();
 });
 
-addCardPopup.setEventListeners();
-
 editButton.addEventListener('click', () => {
   editProfilePopup.setInputValues(userInfo.getUserInfo());
   editProfilePopup.open();
@@ -70,3 +70,5 @@ editButton.addEventListener('click', () => {
 });
 
 editProfilePopup.setEventListeners();
+popupWithImage.setEventListeners();
+addCardPopup.setEventListeners();
