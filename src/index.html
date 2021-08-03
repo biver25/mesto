@@ -19,6 +19,7 @@
       <section class="profile">
         <div class="profile__account">
           <img class="profile__avatar" src="<%=require('.././src/profile-avatar-сousteau.jpg')%>" alt="Кусто">
+          <button type="button" class="profile__avatar-edit"></button>
           <div class="profile__info">
             <div class="profile__row">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -75,6 +76,26 @@
         <button type="submit" class="popup__save-btn">Создать</button>
         <button type="button" class="popup__exit-btn"></button>
       </form>
+    </section>
+    <section class="popup popup_edit-avatar popup_disabled">
+      <form class="popup__form" name="editAvatar" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <label class="popup__label">
+        <input type="url" placeholder="Ссылка на картинку аватара" name="avatar" id="avatar"
+        class="popup__input popup__input_type_avatar" required>
+        <span class="popup__input-error avatar-error" id="avatar-error">
+        </span>
+        </label>
+        <button type="submit" class="popup__save-btn">Сохранить</button>
+        <button type="button" class="popup__exit-btn"></button>
+      </form>
+    </section>
+    <section class="popup popup_confirm popup_disabled">
+      <div class="popup__confirm-wrap">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="button" class="popup__save-btn">Да</button>
+        <button type="button" class="popup__exit-btn"></button>
+      </div>
     </section>
     <section class="popup popup_open-card popup_disabled">
       <div class="popup__card">
