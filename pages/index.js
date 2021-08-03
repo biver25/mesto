@@ -34,7 +34,8 @@ import {templateSelector,
 
   let cardsList;
 
-  api.getInitialCards().then((res) => {
+  api.getInitialCards()
+  .then((res) => {
     cardsList = new Section({
       items: res,
       renderer: (item) => {
@@ -45,6 +46,9 @@ import {templateSelector,
     );
     cardsList.renderItems();
   })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const handleCardClick = (image, caption) => {
   popupWithImage.open(image, caption);
@@ -91,7 +95,10 @@ const submitAddCardForm = (inputValues) => {
 
 const submitEditProfileForm = (inputValues) => {
   inputValues.link = inputValues.description;
-  api.updateServerUserInfo(inputValues);
+  api.updateServerUserInfo(inputValues)
+  .catch((err) => {
+    console.log(err);
+  });
   userInfo.setUserInfo(inputValues);
   editProfilePopup.close();
 };
@@ -116,6 +123,9 @@ const submitEditAvatarForm = (inputValues) => {
       preload(popupEditAvatarSelector, false);
       editAvatarPopup.close();
     })
+    .catch((err) => {
+      console.log(err);
+    });
 
 };
 
@@ -147,13 +157,16 @@ const editAvatarPopup = new PopupWithFormAvatar(popupEditAvatarSelector, submitE
 const submitPopup = new PopupWithSubmit(popupSubmitSelector);
 
 
-api.getServerUserInfo().then((res) => {
+api.getServerUserInfo()
+.then((res) => {
   console.log(res);
   res.description = res.about;
   userInfo.setUserInfo(res);
   userInfo.setUserAvatar(res);
-
 })
+.catch((err) => {
+  console.log(err);
+});
 
 addButton.addEventListener('click', () => {
   addCardPopup.open();
