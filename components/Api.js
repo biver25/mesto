@@ -18,7 +18,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.description
+        about: data.about
       })
     })
       .then(this._handleResponse);
@@ -77,6 +77,10 @@ export default class Api {
       })
     })
       .then(this._handleResponse);
+  }
+
+  getComletedPromises() {
+    return Promise.all([this.getServerUserInfo(), this.getInitialCards()])
   }
 
   _handleResponse(res) {

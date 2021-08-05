@@ -7,25 +7,25 @@
   <meta name=keywords content="фотографии">
   <meta name="author" content="Илья Бурцев">
   <!--link rel="stylesheet" href="./pages/index.css"-->
-  <link rel="shortcut icon" href=".././src/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href=".././images/favicon.ico" type="image/x-icon">
   <title>Mesto</title>
 </head>
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="<%=require('.././src/header-logo.svg')%>"  alt="Место">
+      <img class="header__logo" src="<%=require('.././images/header-logo.svg')%>"  alt="Место">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__account">
-          <img class="profile__avatar" src="<%=require('.././src/profile-avatar-сousteau.jpg')%>" alt="Кусто">
+          <img class="profile__avatar" src="<%=require('.././images/profile-avatar-сousteau.jpg')%>" alt="Кусто">
           <button type="button" class="profile__avatar-edit"></button>
           <div class="profile__info">
             <div class="profile__row">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button type="button" class="profile__edit-btn"></button>
             </div>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__about">Исследователь океана</p>
           </div>
         </div>
         <button type="button" class="profile__add-btn"></button>
@@ -49,9 +49,9 @@
         </span>
         </label>
         <label class="popup__label">
-        <input type="text" placeholder="Описание" name="description" id="description"
-        class="popup__input popup__input_type_descr" required minlength="2" maxlength="200">
-        <span class="popup__input-error description-error" id="description-error">
+        <input type="text" placeholder="Описание" name="about" id="about"
+        class="popup__input popup__input_type_about" required minlength="2" maxlength="200">
+        <span class="popup__input-error about-error" id="about-error">
         </span>
         </label>
         <button type="submit" class="popup__save-btn">Сохранить</button>

@@ -1,4 +1,4 @@
-const templateSelector = '.elements__element';
+const templateSelector = '#elementTemplate';
 const saveButtonSelector = '.popup__save-btn'
 const popupOpenCardSelector = '.popup_open-card';
 const profile = document.querySelector('.profile');
@@ -12,7 +12,7 @@ const popupSubmitSelector = '.popup_confirm';
 
 const userInfoSelectors = {
   nameSelector: '.profile__name',
-  descriptionSelector: '.profile__description',
+  aboutSelector: '.profile__about',
   avatarSelector: '.profile__avatar'
 };
 

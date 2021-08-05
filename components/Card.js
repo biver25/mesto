@@ -1,13 +1,12 @@
 export default class Card {
 
   static selectors = {
-    elementTemplate: '#elementTemplate',
+    elementTemplate: '.elements__element',
     elementsImg:'.elements__img',
     elementsCaption: '.elements__caption',
     elementsDelete: '.elements__delete',
     elementsLike: '.elements__like',
-    elementsLikeQuantity: '.elements__like-quantity',
-    popupConfirm: '.popup_confirm'
+    elementsLikeQuantity: '.elements__like-quantity'
   }
 
   constructor(data, templateSelector, handleCardClick, handleCardDelete, api) {
@@ -22,11 +21,12 @@ export default class Card {
     this._likeQuantity = data.likes.length;
     this._likeArray = data.likes;
     this._api = api;
+    this._myID = data.myID;/*'fd32db01f7dbad05d5a4a896';/*.getServerUserInfo()._id;*/
   }
 
   _getTemplate() {
-    return document.querySelector(Card.selectors.elementTemplate).content
-    .querySelector(this._templateSelector)
+    return document.querySelector(this._templateSelector).content
+    .querySelector(Card.selectors.elementTemplate)
     .cloneNode(true);
   }
 
@@ -38,7 +38,7 @@ export default class Card {
   }
 
   deleteElement(event) {
-    event.target.closest(this._templateSelector).remove();
+    event.target.closest(Card.selectors.elementTemplate).remove();
   }
 
   _addElementsListeners() {
@@ -51,17 +51,18 @@ export default class Card {
     addEventListener('click', () => this._handleCardClick(this._cardPictureLink, this._cardText));
   }
 
-  saveCard() {
+  /*saveCard() {
     this._fillContent();
     this._addElementsListeners();
     this._setDeleteListeners();
     return this._element;
-  }
+  }*/
 
   generateCard() {
     this._fillContent();
     this._checkLikeOwner();
     this._addElementsListeners();
+    /*this._setDeleteListeners();*/
     this._checkPostOwner();
     return this._element;
   }
@@ -69,10 +70,10 @@ export default class Card {
   handleLikeClick(event){
     /*event.target.classList.toggle('elements__like_active');*/
     if (event.target.classList.contains('elements__like_active')) {
-      event.target.classList.remove('elements__like_active');
       this._api.deleteLikes(this._cardID).then((res) => {
         this._element.querySelector(Card.selectors.elementsLikeQuantity)
-      .textContent = res.likes.length;
+        .textContent = res.likes.length;
+        event.target.classList.remove('elements__like_active');
       })
       .catch((err) => {
         console.log(err);
@@ -80,16 +81,15 @@ export default class Card {
     }
 
     else {
-      event.target.classList.add('elements__like_active');
       this._api.putLike(this._cardID).then((res) => {
         this._element.querySelector(Card.selectors.elementsLikeQuantity)
-      .textContent = res.likes.length;
+        .textContent = res.likes.length;
+        event.target.classList.add('elements__like_active');
       })
       .catch((err) => {
         console.log(err);
       });
     }
-
   }
 
   _setDeleteListeners() {
@@ -101,37 +101,26 @@ export default class Card {
   }
 
   _checkPostOwner(){
-    this._api.getServerUserInfo().then((res) => {
-      if (this._postOwnerID == res._id) {
+    if (this._postOwnerID == this._myID) {
         this._setDeleteListeners();
       }
-      else {
+    else {
         this._element.querySelector(Card.selectors.elementsDelete)
         .classList.add('elements__delete_hide');
       }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   }
 
   _checkLikeOwner(){
     if (this._likeQuantity > 0) {
       this._element.querySelector(Card.selectors.elementsLikeQuantity)
       .textContent = this._likeQuantity;
-      this._api.getServerUserInfo()
-      .then((res) => {
-        this._likeArray.some((item) => {
-          if (item._id == res._id) {
-            this._element.querySelector(Card.selectors.elementsLike)
-            .classList.add('elements__like_active');
-          }
-        })
-      })
-      .catch((err) => {
-        console.log(err);
+
+      this._likeArray.some((item) => {
+        if (item._id == this._myID) {
+          this._element.querySelector(Card.selectors.elementsLike)
+          .classList.add('elements__like_active');
+        }
       })
     }
   }
-
 }
