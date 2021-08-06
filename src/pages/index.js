@@ -1,5 +1,5 @@
-import '.././pages/index.css';
-import {config} from '.././utils/config.js';
+import './index.css';
+import {config} from '../utils/config.js';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -19,7 +19,7 @@ import {templateSelector,
   saveButtonSelector,
   popupSubmitSelector,
   userInfoSelectors}
-  from '.././utils/constants.js';
+  from '../utils/constants.js';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
@@ -30,15 +30,6 @@ const api = new Api({
 });
 
 let myID;
-
-api.getServerUserInfo()
-  .then((res) => {
-    myID = res._id;
-  })
-  .catch((err) => {
-    console.log(err)
-  });
-
 let cardsList;
 
 const handleCardClick = (image, caption) => {
@@ -141,6 +132,8 @@ api.getComletedPromises()
 
     userInfo.setUserInfo(datafromUserInfo);
     userInfo.setUserAvatar(datafromUserInfo);
+
+    myID = datafromUserInfo._id
 
     cardsList = new Section({
       items: dataFromInitialCard,
